@@ -59,7 +59,7 @@ const getNews = (element) => {
     let postDate = $(element).find(".field-name-post-date").text()
     let url = $(element).find(".field-name-node-link").find("a").attr("href")
     let category = $(element).find(".field-name-field-blog-category").text()
-    let image = $(element).find(".field-name-global-image").find("img").attr("src")
+    let image = $(element).find(".field-name-field-global-image").find("img").attr("src")
 
     return { title, url, postDate, body, author, category, image}
 }
@@ -73,7 +73,9 @@ app.get('/:section/:id?', (req,res, next) => {
     if (req.params.id) {
         url = url + req.params.id;
     }
-    console.log(url)
+    if (req.query.page) {
+        url = `${url}?page=${req.query.page}`;
+    }
 
     https.get(url, (response) => {
 
