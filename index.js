@@ -118,7 +118,7 @@ app.get('/:section/:id?', (req,res, next) => {
 app.use((req,res) => {
     res.type('text/plain');
     res.status(404);
-    res.send('404 - Not found');
+    res.send('404 - Page Not found');
 });
 
 app.listen(app.get('port'), () => {
