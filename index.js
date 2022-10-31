@@ -8,7 +8,7 @@ app.use(express.static(__dirname + '/public')); // allows direct navigation to s
 
 const BASE_URL = "https://cascade.org/";
 
-const getRides = (element) => {
+const getRide = (element) => {
     let title = $(element).find("h3").text()
     let url = $(element).find("a").attr("href")
     let date = $(element).find(".date-display-single").text()
@@ -17,6 +17,15 @@ const getRides = (element) => {
     let leader = $(element).find(".field-name-field-daily-rideleader").text()
     let location = getLocation($(element).find(".field-name-field-location-address"));
     return { title, url, date, pace, distance, leader, location}
+}
+
+const getClass = (element) => {
+    let title = ($(element).find("h3")) ? $(element).find("h3").text() : $(element).find("h5").text()
+    let body = $(element).find("p").text()
+    let url = $(element).find("a").attr("href")
+    let image = $(element).find("img").attr("src")
+    return { title, body, url, image}
+
 }
 
 const getLocation = (element) => {
@@ -69,7 +78,9 @@ app.get('/', (req,res) => {
 });
 
 app.get('/:section/:id?', (req,res, next) => {
-    let url = `${BASE_URL}${req.params.section}/`
+    let section = (req.params.section == 'classes') ? 'learn/adult-classes' : req.params.section;
+    let url = `${BASE_URL}${section}/`
+    console.log(url)
     if (req.params.id) {
         url = url + req.params.id;
     }
@@ -92,7 +103,13 @@ app.get('/:section/:id?', (req,res, next) => {
             switch (req.params.section) {
               case 'calendar':
                 $('.views-row').each((index, element) => {
-                    item = getRides(element);
+                    item = getRide(element);
+                    data.push(item)
+                });
+                break;
+              case 'classes':
+                $('.node').each((index, element) => {
+                    item = getClass(element);
                     data.push(item)
                 });
                 break;
@@ -103,6 +120,7 @@ app.get('/:section/:id?', (req,res, next) => {
                 });
                 break;
               case 'node':
+                // get details
                 data = getDailyRide($('.node-daily-ride'));
                 data['title'] = $('.page-title').text();
                 break;

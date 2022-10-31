@@ -14,11 +14,11 @@
   "author": "brenden west",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "express": "^4.17.1",
-    "forever": "^4.0.1"
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.5"
+    "nodemon": "^2.0.20"
   }
 }
