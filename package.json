@@ -2,7 +2,7 @@
   "name": "cascade_bike_club_api",
   "version": "1.0.0",
   "engines": {
-    "node": "^16.6.1"
+    "node": "^18.12.0"
   },
   "description": "cascade bicycle club api",
   "main": "index.js",
