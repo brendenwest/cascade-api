@@ -19,13 +19,19 @@ const getRide = (element) => {
     return { title, url, date, pace, distance, leader, location}
 }
 
+const getAdvocate = (element) => {
+    let title = $(element).find("h5").text()
+    let url = $(element).find("a").attr("href")
+    let image = $(element).find("img").attr("src")
+    return { title, url, image}
+}
+
 const getClass = (element) => {
     let title = ($(element).find("h3")) ? $(element).find("h3").text() : $(element).find("h5").text()
     let body = $(element).find("p").text()
     let url = $(element).find("a").attr("href")
     let image = $(element).find("img").attr("src")
     return { title, body, url, image}
-
 }
 
 const getLocation = (element) => {
@@ -101,6 +107,12 @@ app.get('/:section/:id?', (req,res, next) => {
         response.on('end', () => {
             $ = cheerio.load(body);
             switch (req.params.section) {
+              case 'advocate':
+                $('.node').each((index, element) => {
+                    item = getAdvocate(element);
+                    data.push(item)
+                });
+                break;
               case 'calendar':
                 $('.views-row').each((index, element) => {
                     item = getRide(element);
