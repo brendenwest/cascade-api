@@ -113,6 +113,12 @@ app.get('/:section/:id?', (req,res, next) => {
                     data.push(item)
                 });
                 break;
+              case 'explore':
+                $('.node').each((index, element) => {
+                    item = getAdvocate(element);
+                    data.push(item)
+                });
+                break;
               case 'calendar':
                 $('.views-row').each((index, element) => {
                     item = getRide(element);
