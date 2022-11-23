@@ -27,7 +27,7 @@ const getAdvocate = (element) => {
 }
 
 const getClass = (element) => {
-    let title = ($(element).find("h3")) ? $(element).find("h3").text() : $(element).find("h5").text()
+    let title = ($(element).find("h3").text()) ? $(element).find("h3").text() : $(element).find("h5").text()
     let body = $(element).find("p").text()
     let url = $(element).find("a").attr("href")
     let image = $(element).find("img").attr("src")
